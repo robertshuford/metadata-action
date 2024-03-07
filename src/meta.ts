@@ -590,7 +590,14 @@ export class Meta {
     return name.toLowerCase();
   }
 
+  // The tag must be valid ASCII and can contain lowercase and uppercase
+  // letters, digits, underscores, periods, and hyphens. It can't start
+  // with a period or hyphen and must be no longer than 128 characters.
+  // https://docs.docker.com/reference/cli/docker/image/tag/
   private static sanitizeTag(tag: string): string {
-    return tag.replace(/[^a-zA-Z0-9._-]+/g, '-');
+    return tag
+      .replace(/[^a-zA-Z0-9._-]+/g, '-')
+      .replace(/^-/g, '')
+      .substring(0, 128);
   }
 }

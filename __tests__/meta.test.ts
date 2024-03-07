@@ -1919,6 +1919,128 @@ describe('tag', () => {
         "org.opencontainers.image.version=1.1.1"
       ],
       undefined
+    ],
+    [
+      'tag34',
+      'event_tag_some-tag-1.0.0.env',
+      {
+        images: ['org/app', 'ghcr.io/user/app'],
+        tags: [
+          `type=match,"pattern=/^v(\\d.\\d.\\d)$/ig",group=1`,
+          `type=match,pattern=\\d.\\d.\\d`,
+          `type=match,pattern=\\d.\\d`,
+          `type=ref,event=pr`,
+          `type=sha`
+        ]
+      } as Inputs,
+      {
+        main: '1.0.0',
+        partial: ['1.0', 'sha-860c190'],
+        latest: true
+      } as Version,
+      [
+        'org/app:1.0.0',
+        'org/app:1.0',
+        'org/app:sha-860c190',
+        'org/app:latest',
+        'ghcr.io/user/app:1.0.0',
+        'ghcr.io/user/app:1.0',
+        'ghcr.io/user/app:sha-860c190',
+        'ghcr.io/user/app:latest'
+      ],
+      [
+        "org.opencontainers.image.created=2020-01-10T00:30:00.000Z",
+        "org.opencontainers.image.description=This your first repo!",
+        "org.opencontainers.image.licenses=MIT",
+        "org.opencontainers.image.revision=860c1904a1ce19322e91ac35af1ab07466440c37",
+        "org.opencontainers.image.source=https://github.com/octocat/Hello-World",
+        "org.opencontainers.image.title=Hello-World",
+        "org.opencontainers.image.url=https://github.com/octocat/Hello-World",
+        "org.opencontainers.image.version=1.0.0"
+      ],
+      undefined
+    ],
+    [
+      'tag35',
+      'event_tag_some-tag-1.0.0.env',
+      {
+        images: ['org/app', 'ghcr.io/user/app'],
+        // tags: [
+        //   `type=match,pattern=@(\\d.\\d.\\d),group=1`,
+        //   `type=match,pattern=@(\\d.\\d),group=1`,
+        //   `type=match,pattern=@(\\d.\\d),group=3`,
+        //   `type=ref,event=pr`,
+        //   `type=sha`
+        // ]
+      } as Inputs,
+      {
+        main: '1.0.0',
+        partial: ['1.0', 'sha-860c190'],
+        latest: true
+      } as Version,
+      [
+        'org/app:1.0.0',
+        'org/app:1.0',
+        'org/app:sha-860c190',
+        'org/app:latest',
+        'ghcr.io/user/app:1.0.0',
+        'ghcr.io/user/app:1.0',
+        'ghcr.io/user/app:sha-860c190',
+        'ghcr.io/user/app:latest'
+      ],
+      [
+        "org.opencontainers.image.created=2020-01-10T00:30:00.000Z",
+        "org.opencontainers.image.description=This your first repo!",
+        "org.opencontainers.image.licenses=MIT",
+        "org.opencontainers.image.revision=860c1904a1ce19322e91ac35af1ab07466440c37",
+        "org.opencontainers.image.source=https://github.com/octocat/Hello-World",
+        "org.opencontainers.image.title=Hello-World",
+        "org.opencontainers.image.url=https://github.com/octocat/Hello-World",
+        "org.opencontainers.image.version=1.0.0"
+      ],
+      undefined
+    ],
+    [
+      'tag36',
+      'event_tag_some-tag-1.0.0.env',
+      {
+        images: ['org/app', 'ghcr.io/user/app'],
+        tags: [
+          `type=match,pattern=@(\\d.\\d.\\d),group=1`,
+          `type=match,pattern=@(\\d.\\d),group=1,suffix=`,
+          `type=ref,event=pr`,
+          `type=sha`
+        ],
+        flavor: [
+          `suffix=-dev`
+        ]
+      } as Inputs,
+      {
+        main: '1.0.0-dev',
+        partial: ['1.0', 'sha-860c190-dev'],
+        latest: true
+      } as Version,
+      [
+        'org/app:1.0.0-dev',
+        'org/app:1.0',
+        'org/app:sha-860c190-dev',
+        'org/app:latest',
+        'ghcr.io/user/app:1.0.0-dev',
+        'ghcr.io/user/app:1.0',
+        'ghcr.io/user/app:sha-860c190-dev',
+        'ghcr.io/user/app:latest'
+      ],
+      [
+        "org.opencontainers.image.created=2020-01-10T00:30:00.000Z",
+        "org.opencontainers.image.description=This your first repo!",
+        "org.opencontainers.image.licenses=MIT",
+        "org.opencontainers.image.revision=860c1904a1ce19322e91ac35af1ab07466440c37",
+        "org.opencontainers.image.source=https://github.com/octocat/Hello-World",
+        "org.opencontainers.image.title=Hello-World",
+        "org.opencontainers.image.url=https://github.com/octocat/Hello-World",
+        "org.opencontainers.image.version=1.0.0-dev"
+      ],
+      undefined
     ]
   ])('given %p with %p event', tagsLabelsTest);
 });
